@@ -1,0 +1,178 @@
+﻿@model IEnumerable<HRM.DAL.Entity.SalaryFixationEntity>
+@using System.Globalization;
+
+@if (Model.Count() == 0)
+{
+     <h4 class="text-danger center-block" >Personal Number and Branch code Dose not Match</h4>
+}
+else
+{ 
+
+
+    foreach (var item in Model)
+    {
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <label class="control-label col-md-4">File No</label>
+                <div class="col-md-8">
+                    <input type="text" name="FileNo" id="FileNo" class="form-control" placeholder="File No" value="@item.FileNo" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">NID</label>
+                <div class="col-md-8">
+                    <input type="text" name="NID" id="NID" class="form-control" placeholder="NID" value="@item.NID.Trim()" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Mobile No</label>
+                <div class="col-md-8">
+                    <input type="text" name="MobNo" id="MobNo" class="form-control" placeholder="Mobile No" value="@item.MobNo" />
+                </div>
+            </div>
+            <h4 class="text-success">Information</h4>
+            <hr />
+
+        </div>
+    <!-- /.End-Form -->
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-md-4">Name</label>
+                <div class="col-md-8">
+                    <input type="text" name="EmpName" id="EmpName" class="form-control" placeholder="Employee Name" value="@item.EmpName" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Father's Name</label>
+                <div class="col-md-8">
+                    <input type="text" name="FatherName" id="FatherName" class="form-control" placeholder="Father's Name" value="@item.FatherName" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Place of posting</label>
+                <div class="col-md-8">
+                    <input type="text" name="PostingPlace" id="PostingPlace" class="form-control" placeholder="Place of posting" value="@item.PostingPlace" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Date of birth</label>
+                <div class="col-md-8">
+                    <input type="text" name="DOB" id="DOB" class="form-control" placeholder="Date of birth" value="@item.BirthDate" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Joining date</label>
+                <div class="col-md-8">
+                    <input type="text" name="DOJ" id="DOJ" class="form-control" placeholder="Joining date" value="@item.JoiningDate" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Designation</label>
+                <div class="col-md-8">
+                    <input type="text" name="Designation" id="Designation" class="form-control" placeholder="Designation" value="@item.Designation" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Present Grade</label>
+                <div class="col-md-8">
+                    <input type="text" name="Grade" id="Grade" class="form-control" placeholder="Present Grade" value="@item.CurrentGrade" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-4">Last Increment Date<span class="bottom">(As on 30th June 2015)</span></label>
+                <div class="col-md-8">
+                    <input type="text" name="LastIncrementDate" id="LastIncrementDate" class="form-control" placeholder="Last Increment Date" value="@item.LastIncreDate" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Last Promotion Date</label>
+                <div class="col-md-8">
+                    <input type="text" name="LastPromoDate" id="LastPromoDate" class="form-control" placeholder="Last Promotion Date" value="@item.LastPromotionDate" />
+                </div>
+            </div>
+        </div>
+    <!-- /.End-2nd Form -->
+        <h4 class="text-success">Salary Fixation</h4>
+        <hr />
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <label class="control-label col-md-4">01. Scale as per NPS-2009</label>
+                <div class="col-md-8">
+                    <input type="text" name="Scale2009" id="Scale2009" class="form-control" placeholder="Scale as per NPS-2009" value="@item.PayScale2009" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">02. Corresponing Scale as per NPS-2015</label>
+                <div class="col-md-8">
+                    <input type="text" name="Scale2015" id="Scale2015" class="form-control" placeholder="Corresponing Scale as per NPS-2015" value="@item.PayScale2015" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">03. Basic Pay as on 30-06-2015</label>
+                <div class="col-md-8">
+                    <input type="text" name="BasicOnJun2015" id="BasicOnJun2015" class="form-control" placeholder="Basic Pay as on 30-06-2015" value="@Convert.ToDecimal( @item.BasicASONJune2015).ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">04. Personal Pay(PP) as on 30-06-2015(If any)</label>
+                <div class="col-md-8">
+                    <input type="text" name="PersonalPay" id="PersonalPay" class="form-control" placeholder="Personal Pay" value="@item.PersonalPay.ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">05. Total=(3+4)</label>
+                <div class="col-md-8">
+                    <input type="text" name="InitialBasic2009" id="InitialBasic2009" class="form-control" placeholder="Total=(3+4)" value="@Convert.ToDecimal( @item.Total34).ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">06. 1st Slab of the Scale as per NPS-2009</label>
+                <div class="col-md-8">
+                    <input type="text" name="Increment" id="Increment" class="form-control" placeholder="1st Slab of the Scale as per NPS-2009" value="@item.InitialBasic.ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">07. Total=(5-6)</label>
+                <div class="col-md-8">
+                    <input type="text" name="Initial2015" id="Initial2015" class="form-control" placeholder="Total=(5-6)" value="@Convert.ToDecimal( @item.Total56).ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label col-md-4">08. Total amount of Basic Pay(8+9)</label>
+                <div class="col-md-8">
+                    <input type="text" name="NearestBasic" id="NearestBasic" class="form-control" placeholder="Total amount of Basic Pay(8+9)" value="@Convert.ToDecimal( @item.Total78).ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">09. Basic Pay fixed on 01-07-2015</label>
+                <div class="col-md-8">
+                    <input type="text" name="NewBasic" id="NewBasic" class="form-control" placeholder="Basic Pay fixed on 01-07-2015" value="@item.NewBasic.ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">10. If Increment sanctioned from 01-07-2015 to 14-12-2015  mentioned  amount as per NPS-2015</label>
+                <div class="col-md-8">
+                    <input type="text" name="newbasicdesc" id="newbasicdesc" class="form-control" value="@item.NewBasicConDec15Basic.ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">11. Date</label>
+                <div class="col-md-8">
+                    <input type="text" name="sanctiondate" id="sanctiondate" class="form-control" placeholder="Date" value="@item.LastIncreDate" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">12. Next Increment Due on</label>
+                <div class="col-md-8">
+                    <input type="text" name="sanctiondate" id="sanctiondate" class="form-control" placeholder="Next Increment Due on" value=" " />
+                </div>
+            </div>
+        </div>
+    <!-- /.End-3rd Form -->
+    }
+}

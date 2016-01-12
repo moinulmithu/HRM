@@ -1,0 +1,59 @@
+﻿@model IEnumerable<HRM.DAL.Entity.SalaryFixationEntity>
+@using System.Globalization;
+@using System.Threading;
+  
+<div class="form-horizontal">
+    <h5 style="color: green;">Salary Fixation:</h5>
+    <hr />
+        @foreach (var item in Model)
+        {
+            <div class="form-group">
+                <label class="control-label col-md-4">Basic<span class="bottom">(As on 30th June 2015)</span></label>
+                <div class="col-md-8">
+                    <input type="text" name="BasicASONJune2015" id="BasicASONJune2015" class="form-control" value=" @item.BasicASONJune2015.ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Initial Basic<span class="bottom">(As on 2009)</span></label>
+                <div class="col-md-8">
+                    <input type="text" name="InitialBasic" id="InitialBasic" class="form-control" value="@item.InitialBasic.ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Increment</label>
+                <div class="col-md-8">
+                    <input type="text" name="Increment" id="Increment" class="form-control" value="@item.Increment.ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Initial Basic<span class="bottom">(As on 2015)</span></label>
+                <div class="col-md-8">
+                    <input type="text" name="StartingBasic" id="StartingBasic" class="form-control" value="@item.StartingBasic.ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Basic with increment</label>
+                <div class="col-md-8">
+                    <input type="text" name="NewBasicPoint" id="NewBasicPoint" class="form-control" value="@item.NewBasicPoint.ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Nearest Basic</label>
+                <div class="col-md-8">
+                    <input type="text" name="NearestBasic" id="NearestBasic" class="form-control" value="@item.NewBasic.ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" />
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">New Basic</label>
+                <div class="col-md-6">
+                    <input type="text" name="NewBasic" id="NewBasic" class="form-control" value="@item.NewBasic.ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))" /> 
+                </div>
+               
+            </div>
+        }
+    
+</div>
+
+

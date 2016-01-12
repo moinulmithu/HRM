@@ -1,0 +1,352 @@
+﻿@model HRM.DAL.Entity.SalaryFixationEntity
+@{
+    ViewBag.Title = "SingleView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    /*Adding some css for looks good*/
+    span.error {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+        font-weight: bold;
+    }
+
+    span.bottom {
+        display: block;
+        color: green;
+        font-size: 90%;
+    }
+</style>
+
+
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script type="text/javascript" language="javascript">
+    $(document).ready($(function () {
+
+        //$('A[rel="_blank"]').click(function(){
+        //    window.open($(this).attr('href'));
+        //    return false;
+        //});
+        $('#btnShowData').click(function () {
+            var isValidItem = true;
+
+            if ($('#EmpCode').val().trim() == '') {
+                isValidItem = false;
+                $('#EmpCode').siblings('span.error').css('visibility', 'visible');
+            }
+            else {
+                $('#EmpCode').siblings('span.error').css('visibility', 'hidden');
+            }
+
+
+            if (isValidItem) {
+                $('#progress').show();
+                $("#divFund").empty();
+            }
+            $.ajax({
+                url: '@Url.Action("GetIndividualSalaryFixationInfo")',
+                type: 'GET',
+                data: { empCode: $('#EmpCode').val() },
+                complete: function () {
+                    $('#progress').hide();
+                },
+                success: function (result) {
+                    $('#divFund').html(result);
+                }
+            });
+            return false;
+        });
+
+        $('#btnPrint').click(function () {
+            var isValidItem = true;
+
+            if ($('#EmpCode').val().trim() == '') {
+                isValidItem = false;
+                $('#EmpCode').siblings('span.error').css('visibility', 'visible');
+            }
+            else {
+                $('#EmpCode').siblings('span.error').css('visibility', 'hidden');
+            }
+
+
+            if (isValidItem) {
+                $('#progress').show();
+                $("#divFund").empty();
+            }
+            $.ajax({
+                url: '@Url.Action("demoAction", "Report")',
+                type: 'GET',
+
+                data: { reportType: 100, empCode: $('#EmpCode').val(), periodID: 0, yearID: 0 },
+                complete: function () {
+                    $('#progress').hide();
+                    window.open("/HRMFixation/Report/ShowReport?reportType=100&empCode="+ $('#EmpCode').val()+"&periodID=0&yearID=0", '_blank');
+                },
+                success: function (result) {
+                    $('#divFund').html(result);
+                }
+            });
+            return false;
+        });
+        //ShowReport
+
+    }));
+    function ClearResults() {
+        $("#EmpCode").val('');
+        $("#FileNo").val('');
+        $("#NID").val('');
+        $("#MobNo").val('');
+        $("#EmpName").val('');
+        $("#FatherName").val('');
+        $("#PostingPlace").val('');
+        $("#DOB").val('');
+        $("#DOJ").val('');
+        $("#Designation").val('');
+        $("#Grade").val('');
+        $("#LastIncrementDate").val('');
+        $("#LastPromoDate").val('');
+        $("#Scale2009").val('');
+        $("#Scale2015").val('');
+        $("#BasicOnJun2015").val('');
+        $("#PersonalPay").val('');
+        $("#InitialBasic2009").val('');
+        $("#Increment").val('');
+        $("#Initial2015").val('');
+        $("#NearestBasic").val('');
+        $("#NewBasic").val('');
+        $("#newbasicdesc").val('');
+        $("#sanctiondate").val('');
+
+    }
+
+</script>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-agrani">
+                <div class="panel-heading">
+                    Salary Fixation (Single View)
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body" id="mform">
+                    <div class="form-horizontal">
+
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Personal Number</label>
+                            <div class="col-md-8">
+                                <input type="text" name="EmpCode" id="EmpCode" placeholder="Personal Number" class="form-control" />
+                                <span class="error">Please Enter Personal Number</span>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <div class="col-md-8">
+                                <input type="button" class="btn btn-success" value="Show Data" id="btnShowData" /> &nbsp;&nbsp;
+                                <input type="button" class="btn btn-default" value="Refresh" id="btnRefresh" onclick="ClearResults()" />
+
+                                &nbsp;&nbsp;<input type="button" class="btn btn-info" value=" Print " id="btnPrint" onclick="this.target='_blank';" />
+                                @*@Html.ActionLink("Print", "ShowReport", "Report","", new { @class = "btn btn-danger", target = "_blank", id = "btnPrint" })*@
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.End-Form -->
+                   
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="progress" style="display:none; align-content:center;">
+                                <span class="text-success"> <b>Please wait while data is loading ......      </b></span>  <img src="~/Assets/spinner.gif" />
+                            </div>
+
+                            <div id="divFund">
+                              
+                                <div class="form-horizontal">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">File No</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="FileNo" id="FileNo" class="form-control" placeholder="File No" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">NID</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="NID" id="NID" class="form-control" placeholder="NID" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Mobile No</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="MobNo" id="MobNo" class="form-control" placeholder="Mobile No" />
+                                        </div>
+                                    </div>
+                                    <h4 class="text-success">Information</h4>
+                                    <hr />
+
+                                </div>
+                                <!-- /.End-Form -->
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Name</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="EmpName" id="EmpName" class="form-control" placeholder="Employee Name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Father's Name</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="FatherName" id="FatherName" class="form-control" placeholder="Father's Name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Place of posting</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="PostingPlace" id="PostingPlace" class="form-control" placeholder="Place of posting" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Date of birth</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="DOB" id="DOB" class="form-control" placeholder="Date of birth" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Joining date</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="DOJ" id="DOJ" class="form-control" placeholder="Joining date" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Designation</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="Designation" id="Designation" class="form-control" placeholder="Designation" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Present Grade</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="Grade" id="Grade" class="form-control" placeholder="Present Grade" />
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Last Increment Date</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="LastIncrementDate" id="LastIncrementDate" class="form-control" placeholder="Last Increment Date" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Last Promotion Date</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="LastPromoDate" id="LastPromoDate" class="form-control" placeholder="Last Promotion Date" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.End-2nd Form -->
+                                <h4 class="text-success">Salary Fixation</h4>
+                                <hr />
+                                <div class="form-horizontal">                                  
+                                   
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">01. Scale as per NPS-2009</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="Scale2009" id="Scale2009" class="form-control" placeholder="Scale as per NPS-2009" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">02. Corresponing Scale as per NPS-2015</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="Scale2015" id="Scale2015" class="form-control" placeholder="Corresponing Scale as per NPS-2015" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">03. Basic Pay as on 30-06-2015</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="BasicOnJun2015" id="BasicOnJun2015" class="form-control" placeholder="Basic Pay as on 30-06-2015" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">04. Personal Pay(PP) as on 30-06-2015(If any)</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="PersonalPay" id="PersonalPay" class="form-control" placeholder="Personal Pay" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">05. Total=(3+4)</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="InitialBasic2009" id="InitialBasic2009" class="form-control" placeholder="Total=(3+4)" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">06. 1st Slab of the Scale as per NPS-2009</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="Increment" id="Increment" class="form-control" placeholder="1st Slab of the Scale as per NPS-2009" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">07. Total=(5-6)</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="Initial2015" id="Initial2015" class="form-control" placeholder="Total=(5-6)" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">08. Total amount of Basic Pay(8+9)</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="NearestBasic" id="NearestBasic" class="form-control" placeholder="Total amount of Basic Pay(8+9)" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">09. Basic Pay fixed on 01-07-2015</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="NewBasic" id="NewBasic" class="form-control" placeholder="Basic Pay fixed on 01-07-2015" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">10. If Increment sanctioned from 01-07-2015 to 14-12-2015  mentioned  amount as per NPS-2015</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="newbasicdesc" id="newbasicdesc" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">11. Date</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="sanctiondate" id="sanctiondate" class="form-control" placeholder="Date" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">12. Next Increment Due on</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="sanctiondate" id="sanctiondate" class="form-control" placeholder="Next Increment Due on" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.End-3rd Form -->
+                            </div>
+
+
+                        </div>
+                        <!-- /.End-col-md-12 -->
+                    </div>
+                </div>
+                <!-- /.End-panel body -->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

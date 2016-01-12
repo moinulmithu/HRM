@@ -1,0 +1,162 @@
+﻿@model IEnumerable<HRM.DAL.Entity.SalaryFixationEntity>
+@using System.Globalization;
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive" style=" width: 100%; margin-bottom: 15px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; -ms-overflow-style: -ms-autohiding-scrollbar; border: 1px solid #DDD;">
+                <table class="table table-condensed table-bordered table-hover">
+                    <thead>
+                        <tr style="color: #fff; background-color: #007500;">
+                            
+                            <th nowrap>
+                                Personal ID
+                            </th>
+                            <th nowrap>
+                                Name
+                            </th>
+                            <th nowrap>
+                                File No
+                            </th>
+                            <th nowrap>
+                                Designation
+                            </th>
+                            <th nowrap>
+                                NID
+                            </th>
+                            <th nowrap>
+                                Mobile No
+                            </th>
+                            <th nowrap>
+                                Father Name
+                            </th>
+                            <th nowrap>
+                                DOB
+                            </th>
+                            <th nowrap>
+                                Joining Date
+                            </th>
+
+                            <th nowrap>
+                                Current Grade
+                            </th>
+                            <th nowrap>
+                                Last Promotion Date
+                            </th>
+                            <th nowrap>
+                                Last Incre Date
+                            </th>
+                            <th nowrap>
+                                Scale-2009
+                            </th>
+                            <th nowrap>
+                                Scale-2015
+                            </th>
+                            <th nowrap>
+                                Basic June-2015
+                            </th>
+                            <th nowrap>
+                                PP No
+                            </th>
+                            <th nowrap>
+                                Total
+                            </th>
+                            <th nowrap>
+                                First Slab 2009
+                            </th>
+                            <th nowrap>
+                                Total56
+                            </th>
+                            <th nowrap>
+                                First Slab 2015
+                            </th>
+                            <th nowrap>
+                                Total78
+                            </th>
+                            <th nowrap>
+                                Basic Pay Fixed 2015
+                            </th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.EmpCode)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.EmpName)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.FileNo)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.Designation)
+                                </td>
+                               <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.NID)
+                                </td>
+                               <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.MobNo)
+                                </td>
+                               <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.FatherName)
+                                </td>
+                               <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.BirthDate)
+                                </td>
+                               <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.JoiningDate)
+                                </td>
+
+                               <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.CurrentGrade)
+                                </td>
+                               <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.LastPromotionDate)
+                                </td>
+                               <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.LastIncreDate)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.PayScale2009)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.PayScale2015)
+                                </td>
+                                <td style="text-align:right" nowrap>
+                                    @Convert.ToDecimal(@item.BasicASONJune2015).ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))
+                                </td>
+                                <td style="text-align:right" nowrap>
+                                    @Convert.ToDecimal(@item.PersonalPay).ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))
+                                </td>
+                                <td style="text-align:right" nowrap>
+                                    @Convert.ToDecimal(@item.Total34).ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))
+                                </td>
+                                <td style="text-align:right" nowrap>
+                                    @Convert.ToDecimal(@item.InitialBasic).ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))
+                                </td>
+                                <td style="text-align:right" nowrap>
+                                    @Convert.ToDecimal(@item.Total56).ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))
+                                </td>
+                                <td style="text-align:right" nowrap>
+                                    @Convert.ToDecimal(@item.StartingBasic).ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))
+                                </td>
+                                <td style="text-align:right" nowrap>
+                                    @Convert.ToDecimal(@item.Total78).ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))
+                                </td>
+                                <td style="text-align:right" nowrap>
+                                    @Convert.ToDecimal(@item.NewBasicConDec15Basic).ToString("C2", CultureInfo.CreateSpecificCulture("bn-BD"))
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
